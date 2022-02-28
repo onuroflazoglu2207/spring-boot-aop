@@ -1,0 +1,97 @@
+NOTE :
+
+=> JoinPoint, yöntem parametreleri, dönüş değeri veya atılan özel durum gibi belirli bir birleştirme noktasında kullanılabilen
+=> duruma yansıtıcı erişim sağlayan bir AspectJ arabirimidir. Ayrıca, yöntemin kendisi hakkında tüm statik bilgileri sağlar.
+
+=> ProceedingJoinPoint, JoinPoint'in ek proceed() yöntemini kullanıma açan bir uzantısıdır.
+=> Çağrıldığında, kod yürütme sonraki öneriye veya hedef yönteme atlar.
+=> Bu bize kod akışını kontrol etme ve daha fazla çağrıyla devam edip etmemeye karar verme gücü verir.
+
+=> &&(AND),||(OR), !(NOT) kullanarak birden çok noktasal ifadeyi birleştirebiliriz.
+
+
+
+
+EXECUTION : kurala gore uyan tum fonksiyonlari kapsar.
+
+=> execution(public com.example.demo.model.UserModel com.example.demo.controller.UserController.getAll())
+=> com.example.demo.controller.UserController.getAll() lardan sadece public UserModel olani ve parametre almayanlari kapsar.
+
+=> execution(public * getAll(..))
+=> butun parametre alan getAll fonsiyonlarini kapsar.
+=> hangi sinifta oldugu onemli degil. public olan, donus parametresi farketmeyen, ismi getAll olan ve parametre alan tum fonsiyonlari kapsar.
+
+=> execution(* com.example.demo.controller.UserController.*())
+=> public, private, protected farketmeksizin ve donus parametresi farketmeksizin UserControllerdaki tum fonsiyonlardan parametre almayanlari kapsar.
+
+=> execution(* com.example.demo.controller.UserController.get*(Long))
+=> public, private, protected farketmeksizin ve donus parametresi farketmeksizin
+=> UserControllerdaki adi get ile baslayan ve parametre tipi Long olanlari kapsar.
+
+=> execution(* *..find*(Long,..))
+=> public, private, protected farketmeksizin ve donus parametresi farketmeksizin
+=> hangi pakatte ve hangi classta oldugu farketmeksizin adi find ile baslayip parametrelerinden biri Long olan tum fonsiyonlari kapsar.
+
+=> execution(* *..find*(*))
+=> public, private, protected farketmeksizin ve donus parametresi farketmeksizin
+=> hangi pakatte ve hangi classta oldugu farketmeksizin adi find ile baslayip parametre alip almadigina bakmaksizin kapsar.
+
+
+
+
+WITHIN, @WITHIN: belirli bir paket yada classtaki tum methodlari kapsar.
+
+within(@org.springframework.web.bind.annotation.RestController *)
+@within(org.springframework.web.bind.annotation.RestController)
+=> RestController anotasyonunu iceren tum siniflari kapsar. bu finiftaki methodlar cagirilinca devreye girer.
+
+within(com.example.demo.controller.UserController)
+=> UserContoller classindaki tum metholari kapsar.
+
+within(com.example.demo.controller.*)
+=> controller paketindeki tum siniflari kapsar.
+
+within(com.example.demo.*.*)
+=> demo paketinin icindeki tum paketlerin icindeki tum siniflari kapsar.
+
+within(com.example.demo..*)
+=> demo paketinin icindeki tum paketlerin icindeki tum siniflari kapsar.
+
+
+
+
+THIS, TARGET: belirtilen siniftaki tum methodlari kapsar.
+
+target(com.example.demo.controller.UserController)
+this(com.example.demo.controller.UserController)
+=> Belirtilen sinifin tum hethodlarini kapsar.
+
+
+
+
+ANNOTATION: belirtilen anotasyonu iceren fonksiyonu kapsar.
+
+@annotation(org.springframework.web.bind.annotation.DeleteMapping)
+=> belirtilen anotasyonu iceren methodlari kapsar.
+
+
+
+
+ARGS: belirtilen methoddaki fieldleri cekmeni saglar. ayni islemi JOINPOINT classi ilede yapalirsin.
+
+args(identity)
+=> identity degerini almani saglar.
+
+...
+
+
+
+
+BEAN: olusturulmus bean lari algilayip, sectigin classin icindeki methodlari algilar.
+
+bean(userController)
+bean(userServiceImpl)
+bean(userRepository)
+=> bean ile olusturulmus bu objeleri algilar ve classtak tum methodlari kapsar.
+
+

@@ -1,0 +1,29 @@
+DEPENDENCY
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+
+
+ANNOTATION:
+
+@Aspect => sinifin aspect oldugunu bildirir. Aspect = bakis acisi anlamindandir.
+
+@Before => belirtilen methodakki islemden once yapilacaklar.
+
+@After  => belirtilen methodan ilem bittikten sonra yapilacaklar.
+
+@AfterReturning => belirtilen method return ettikten sonra yapilacaklar.
+@After ile arasindaki fark ise @AfterReturning return edilen objeyi cekebilmesi.
+
+@AfterThrowing => belirtilen methodda karsilasilan throw da devreye girer.
+
+@Around => Bu en güçlü tavsiye türüdür. Etrafında tavsiye yöntem çağırmadan önce ve sonra özel davranış gerçekleştirebilir.
+=> Ayrıca, birleştirme noktasına devam etmeyi veya kendi dönüş değerini döndürebilir veya bir özel durum atarayabilir.
+=> Diger ASPECT ANOTASYONLARINI HICE sayar.
+
+@Pointcut => yöntemin yürütülmesi veya bir özel durumun işlenmesi gibi program yürütme adımıdır.
+=> her zaman bir yöntem yürütmeyi temsil eder.
+
+@DeclareError @DeclareMixin @DeclareParents @DeclarePrecedence @DeclareWarning @RequiredTypes @SuppressAjWarnings
+declare = bildirmek demek
